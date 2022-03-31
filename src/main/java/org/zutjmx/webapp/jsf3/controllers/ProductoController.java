@@ -14,6 +14,8 @@ import java.util.List;
 @Model
 public class ProductoController {
 
+    private Producto producto;
+
     @Inject
     private ProductoService productoService;
 
@@ -27,11 +29,14 @@ public class ProductoController {
     @RequestScoped
     @Named("listado")
     public List<Producto> findAll() {
-        /*return Arrays.asList(new Producto("Peras"),
-                new Producto("Manzanas"),
-                new Producto("Guayabas"),
-                new Producto("Pitayas"));*/
         return productoService.listar();
+    }
+
+    @Produces
+    @Model
+    public Producto producto() {
+        this.producto = new Producto();
+        return producto;
     }
 
 }
